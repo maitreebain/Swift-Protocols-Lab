@@ -40,6 +40,72 @@ Create a new array called sortedPeople of type [`Human`] that is the people arra
 
 </br> </br>
 
+```
+class Human: CustomStringConvertible, Equatable, Comparable {
+    
+    static func < (lhs: Human, rhs: Human) -> Bool {
+        return lhs.age < rhs.age
+    }
+    
+    static func > (lhs: Human, rhs: Human) -> Bool {
+        return lhs.age > rhs.age
+    }
+    
+    static func == (lhs: Human, rhs: Human) -> Bool {
+        return lhs.name == rhs.name && lhs.age == rhs.age
+    }
+    
+    static func != (lhs: Human, rhs: Human) -> Bool {
+        return lhs.name != rhs.name && lhs.age != rhs.age
+    }
+    
+    var name: String
+    var age: Int
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+         var description: String {
+            return "\(name) is \(age) years old."
+        }
+}
+
+var nickJonas = Human(name: "Nick Jonas", age: 27)
+var joeJonas = Human(name: "Joe Jonas", age: 30)
+var kevinJonas = Human(name: "Kevin Jonas", age: 31)
+var frankieJonas = Human(name: "Frankie Jonas", age: 19)
+var demiLovato = Human(name: "Demi Lovato", age: 27)
+
+print(nickJonas)
+print(joeJonas)
+
+if nickJonas == joeJonas {
+    print("They are the same person.")
+} else if nickJonas != joeJonas {
+    print("They are different people.")
+}
+
+if nickJonas > joeJonas {
+    print("Nick Jonas is older than Joe Jonas.")
+} else if nickJonas < joeJonas {
+    print("Joe Jonas is older than Nick Jonas.")
+}
+
+var humanArray = [Human]()
+humanArray.append(nickJonas)
+humanArray.append(joeJonas)
+humanArray.append(kevinJonas)
+humanArray.append(frankieJonas)
+humanArray.append(demiLovato)
+
+var sortedHumans = [nickJonas.age, joeJonas.age, kevinJonas.age, frankieJonas.age, demiLovato.age].sorted()
+print(sortedHumans)
+
+
+
+```
+
 
 ## Question 2
 
@@ -56,7 +122,40 @@ and drive() should print "Begin pedaling!". Create an instance of Bike, print it
 then call drive().
 
 </br> </br>
+```
+protocol Vehichle {
+    var numberOfWheels: Int { get }
+    
+    func drive()
+}
 
+struct Car: Vehichle {
+    var numberOfWheels: Int {
+        return 4
+    }
+    
+    func drive() {
+        print("Vroom, vroom!")
+    }
+}
+
+let car = Car()
+car.drive()
+
+struct Bike: Vehichle {
+    var numberOfWheels: Int {
+        return 2
+    }
+    
+    func drive() {
+        print("Begin pedaling!")
+    }
+}
+
+let bike = Bike()
+bike.drive()
+
+```
 
 ## Question 3
 // Given the below two protocols, create a struct for penguin(a flightless bird) and an eagle.
@@ -72,6 +171,42 @@ protocol Bird {
 protocol Flyable {
  var airspeedVelocity: Double { get }
 }
+```
+
+```
+protocol Bird {
+ var name: String { get }
+ var canFly: Bool { get }
+}
+
+protocol Flyable {
+ var airspeedVelocity: Double { get }
+}
+
+struct Penguin: Bird {
+    var name: String {
+        return "penguin"
+    }
+    var canFly: Bool {
+        return false
+    }
+    
+}
+
+struct Eagle: Bird, Flyable {
+    var name: String {
+        return "eagle"
+    }
+    var canFly: Bool {
+        return true
+    }
+    
+    var airspeedVelocity: Double {
+        return Double.random(in: 75...99)
+    }
+    
+}
+
 ```
 
 </br> </br>
@@ -96,6 +231,34 @@ var bruceBanner = SuperHero.notHulk
 bruceBanner.transform() . // hulk
 
 bruceBanner.transform()  // notHulk
+```
+```
+protocol Transformation {
+    
+    mutating func transform()
+}
+
+enum SuperHero: Transformation {
+    
+    case notHulk
+    case hulk
+    
+    mutating func transform() {
+        switch self {
+        case .notHulk:
+            self = .hulk
+            print("HULK SMASH!")
+        case .hulk:
+            self = .notHulk
+            print("Haven't hulked out")
+        }
+    }
+
+}
+
+var bruceBanner = SuperHero.notHulk
+bruceBanner.transform()
+
 ```
 
 </br> </br>
