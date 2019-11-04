@@ -93,16 +93,9 @@ if nickJonas > joeJonas {
 }
 
 var humanArray = [Human]()
-humanArray.append(nickJonas)
-humanArray.append(joeJonas)
-humanArray.append(kevinJonas)
-humanArray.append(frankieJonas)
-humanArray.append(demiLovato)
-
-var sortedHumans = [nickJonas.age, joeJonas.age, kevinJonas.age, frankieJonas.age, demiLovato.age].sorted()
-print(sortedHumans)
-
-
+var sortedHumans: [Human] = [nickJonas, joeJonas, kevinJonas, frankieJonas, demiLovato]
+var sorted = sortedHumans.sorted()
+print(sorted)
 
 ```
 
@@ -280,6 +273,37 @@ f. Put an instance of each of your classes in an array.
 
 g. Iterate over the array and have them print their `message` property
 
+
+```
+protocol Communication {
+    var message: String { get }
+}
+
+class Cow: Communication {
+    var message: String {
+        return "Moo"
+    }
+}
+
+class Dog: Communication {
+    var message: String {
+        return "Ruff"
+    }
+}
+
+class Cat: Communication {
+    var message: String {
+        return "Meow"
+    }
+}
+
+var cow = Cow()
+var dog = Dog()
+var cat = Cat()
+
+var animalArray: [Any] = [cow, dog, cat]
+
+```
 
 ## Question 6
 
