@@ -281,27 +281,31 @@ protocol Communication {
 
 class Cow: Communication {
     var message: String {
-        return "Moo"
+        return "A cow goes Moo."
     }
 }
 
 class Dog: Communication {
     var message: String {
-        return "Ruff"
+        return "A dog goes Ruff."
     }
 }
 
 class Cat: Communication {
     var message: String {
-        return "Meow"
+        return "A cat goes Meow."
     }
 }
 
-var cow = Cow()
-var dog = Dog()
-var cat = Cat()
+var cow = Cow.init().message
+var dog = Dog.init().message
+var cat = Cat.init().message
 
 var animalArray: [Any] = [cow, dog, cat]
+
+for animal in animalArray {
+print(animal)
+}
 
 ```
 
